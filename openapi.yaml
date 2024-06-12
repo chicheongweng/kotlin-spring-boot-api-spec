@@ -606,9 +606,9 @@ components:
       properties:
         id:
           x-field-extra-annotation: '@Id @GeneratedValue(strategy = GenerationType.IDENTITY)'
-          type: integer
-          format: int64
-          example: 10
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
         petId:
           type: integer
           format: int64
