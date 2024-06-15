@@ -689,6 +689,7 @@ components:
           format: int64
           example: 1
         name:
+          x-field-extra-annotation: '@Column(unique = true)'
           type: string
           example: Dogs
       xml:
