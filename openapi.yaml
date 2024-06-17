@@ -321,6 +321,66 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+  /pet/findByUUID:
+    get:
+      tags:
+        - pet
+      summary: Find pet by UUID
+      description: Returns a single pet
+      operationId: getPetByUUID
+      parameters:
+        - name: uuid
+          in: query
+          description: UUID of pet to return
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '400':
+          description: Invalid UUID supplied
+        '404':
+          description: Pet not found
+      security:
+        - api_key: [ ]
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /pet/deleteByUUID:
+    delete:
+      tags:
+        - pet
+      summary: Deletes a pet by UUID
+      description: Deletes a pet by UUID
+      operationId: deletePetByUUID
+      parameters:
+        - name: uuid
+          in: query
+          description: UUID of the pet to delete
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Pet deleted successfully
+        '400':
+          description: Invalid UUID supplied
+        '404':
+          description: Pet not found
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
   /store/inventory:
     get:
       tags:
@@ -752,6 +812,11 @@ components:
           type: integer
           format: int64
           example: 10
+        uuid: # New UUID field
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+          x-index-extra-annotation: '@Index(unique = true)'
         name:
           type: string
           example: doggie
