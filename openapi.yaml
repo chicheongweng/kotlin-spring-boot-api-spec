@@ -356,7 +356,7 @@ paths:
             - write:pets
             - read:pets
   /pet/deleteByUUID:
-    delete:
+    get:
       tags:
         - pet
       summary: Deletes a pet by UUID
